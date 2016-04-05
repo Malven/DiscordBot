@@ -39,7 +39,7 @@ namespace SotnBot
             [JsonProperty("username")]
             public string Email;
             [JsonProperty("password")]
-            public string Password = "d6qkwa52";
+            public string Password;
         }
         [JsonProperty("discord")]
         private DiscordSettings _discord = new DiscordSettings();
