@@ -20,10 +20,11 @@ namespace SotnBot
 
         private void Start(string[] args)
         {
+            //Enter login info here
             GlobalSettings.Discord.Email = "";
             GlobalSettings.Discord.Password = "";
-            GlobalSettings.Save();
 
+            //GlobalSettings.Save();
             GlobalSettings.Load();
 
             _client = new DiscordClient(x =>
