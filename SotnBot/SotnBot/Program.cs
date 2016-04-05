@@ -13,11 +13,19 @@ namespace SotnBot
     class Program
     {
         private DiscordClient _client;
-
+        
+        
+                
         static void Main(string[] args) => new Program().Start(args);
 
         private void Start(string[] args)
         {
+            GlobalSettings.Discord.Email = "";
+            GlobalSettings.Discord.Password = "";
+            GlobalSettings.Save();
+
+            GlobalSettings.Load();
+
             _client = new DiscordClient(x =>
             {
                 x.AppName = "S.O.T.N-BOT";
@@ -31,7 +39,7 @@ namespace SotnBot
 
             _client.ExecuteAndWait(async () =>
             {
-                await _client.Connect("dahil82@gmail.com", "d6qkwa52");
+                await _client.Connect(GlobalSettings.Discord.Email, GlobalSettings.Discord.Password);
                 _client.SetGame("sotn.malven.se");
             });
         }

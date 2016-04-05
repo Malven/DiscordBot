@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\GlobalSettings.cs" />
     <Compile Include="Classes\IMDBMovie.cs" />
     <Compile Include="Classes\IMDBScraper.cs" />
     <Compile Include="Modules\Search\SearchModule.cs" />

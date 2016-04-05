@@ -13,7 +13,6 @@ namespace SotnBot.Modules.Search
     {
         private ModuleManager _manager;
         private DiscordClient _client;
-        private bool _isRunning;
 
         void IModule.Install(ModuleManager manager)
         {
