@@ -3,6 +3,7 @@ using Discord.Commands;
 using Discord.Modules;
 using SotnBot.Modules.Diablo;
 using SotnBot.Modules.Search;
+using SotnBot.Modules.Public;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,7 @@ namespace SotnBot
 
             _client.AddModule<SearchModule>("Search", ModuleFilter.None);
             _client.AddModule<DiabloModule>("Diablo", ModuleFilter.None);
+            _client.AddModule<PublicModule>("Suggestion", ModuleFilter.None);
 
             _client.ExecuteAndWait(async () =>
             {
