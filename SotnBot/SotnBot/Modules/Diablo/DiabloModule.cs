@@ -19,15 +19,15 @@ namespace SotnBot.Modules.Diablo
             _manager = manager;
             _client = manager.Client;
 
-            manager.CreateCommands("diablo", group =>
+            manager.CreateCommands("", group =>
             {
                 group.CreateCommand("barbarian")
-                .Description("Returns a link to a Barbarian solo build unless 'group' is specified.")
+                .Description("Returns a link to a Barbarian solo build unless 'barbarian group' is specified.")
                 .Alias("barb")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if(e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69882-2-4-gr100-zdps-globe-barb-group");
@@ -37,13 +37,13 @@ namespace SotnBot.Modules.Diablo
                     }
                 });
 
-                group.CreateCommand("demon hunter")
-                .Description("Returns a link to a Demon Hunter solo build unless 'group' is specified.")
+                group.CreateCommand("demonhunter")
+                .Description("Returns a link to a Demon Hunter solo build unless 'demonhunter group' is specified.")
                 .Alias("dh")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69873-2-4-gr92-dh-shadow-impale");
@@ -55,12 +55,12 @@ namespace SotnBot.Modules.Diablo
                 });
 
                 group.CreateCommand("wizard")
-                .Description("Returns a link to a Wizard solo build unless 'group' is specified.")
+                .Description("Returns a link to a Wizard solo build unless 'wizard group' is specified.")
                 .Alias("wiz")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69867-2-4-gr100-energy-twister");
@@ -72,12 +72,12 @@ namespace SotnBot.Modules.Diablo
                 });
 
                 group.CreateCommand("monk")
-                .Description("Returns a link to a Monk solo build unless 'group' is specified.")
+                .Description("Returns a link to a Monk solo build unless 'monk group' is specified.")
                 .Alias("mo")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69908-2-4-gr100-loh-heal-monk-group");
@@ -89,12 +89,12 @@ namespace SotnBot.Modules.Diablo
                 });
 
                 group.CreateCommand("crusader")
-                .Description("Returns a link to a Crusader solo build unless 'group' is specified.")
+                .Description("Returns a link to a Crusader solo build unless 'crusader group' is specified.")
                 .Alias("cru", "sader")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69853-2-4-gr90-lon-bombardment");
@@ -105,13 +105,13 @@ namespace SotnBot.Modules.Diablo
                     }
                 });
 
-                group.CreateCommand("witch doctor")
-                .Description("Returns a link to a Witch Doctor build unless 'group' is specified.")
+                group.CreateCommand("witchdoctor")
+                .Description("Returns a link to a Witch Doctor build unless 'witchdoctor group' is specified.")
                 .Alias("wd")
                 .Parameter("group", ParameterType.Optional)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
                         await e.Channel.SendMessage("http://www.diablofans.com/builds/69876-2-4-gr100-wd-support-group");

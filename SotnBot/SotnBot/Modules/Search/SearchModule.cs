@@ -19,14 +19,14 @@ namespace SotnBot.Modules.Search
             _manager = manager;
             _client = manager.Client;
 
-            manager.CreateCommands("search", group =>
+            manager.CreateCommands("", group =>
             {
                 group.CreateCommand("imdb")
-                .Description("Searches IMDB.")
-                .Parameter("value", ParameterType.Required)
+                .Description("Searches IMDB, returns the first movie it finds with the title.")
+                .Parameter("title", ParameterType.Required)
                 .Do(async e =>
                 {
-                    e.Channel.SendIsTyping();
+                    await e.Channel.SendIsTyping();
                     string result;
                     var movie = ImdbScraper.ImdbScrape(e.Args[0], true);
                     if (movie.Status) result = movie.ToString();

@@ -44,13 +44,23 @@ namespace SotnBot
 
         public Dictionary<string, string> Aka { get; set; }
 
-        public override string ToString() =>
-            $@"`Title:` {Title} {(string.IsNullOrEmpty(OriginalTitle) ? "" : $"({OriginalTitle})")}
-            `Year:` {Year}
-            `Rating:` {Rating}
-            `Genre:` {GenresAsString}
-            `Link:` <{ImdbURL}>
-            `Plot:` {System.Net.WebUtility.HtmlDecode(Plot.TrimTo(500))}";
+        //public override string ToString() =>
+        //    $@"`Title:` {Title} {(string.IsNullOrEmpty(OriginalTitle) ? "" : $"({OriginalTitle})\n")}
+        //    `Year:` {Year}\n
+        //    `Rating:` {Rating}\n
+        //    `Genre:` {GenresAsString}\n
+        //    `Link:` <{ImdbURL}>\n
+        //    `Plot:` {System.Net.WebUtility.HtmlDecode(Plot.TrimTo(500))}";
+
+        public override string ToString()
+        {
+            return "Title: " + Title + " " + (string.IsNullOrEmpty(OriginalTitle) ? "" : OriginalTitle) + "\n" +
+                    "Year: " + Year + "\n" +
+                    "Rating: " + Rating + "\n" +
+                    "Genre: " + GenresAsString + "\n" +
+                    "Link: " + ImdbURL + "\n" +
+                    "Plot: " + System.Net.WebUtility.HtmlDecode(Plot.TrimTo(500));
+        }
 
         //public string EnglishTitle => Aka.ContainsKey("USA") ? Aka["USA"] :
         //                              (Aka.ContainsKey("UK") ? Aka["UK"] :

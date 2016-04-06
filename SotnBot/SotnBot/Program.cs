@@ -14,8 +14,9 @@ namespace SotnBot
     class Program
     {
         private DiscordClient _client;
-        
-        
+        public List<Server> server;
+
+        private bool _isUpdated = false;
                 
         static void Main(string[] args) => new Program().Start(args);
 
@@ -44,6 +45,15 @@ namespace SotnBot
             {
                 await _client.Connect(GlobalSettings.Discord.Email, GlobalSettings.Discord.Password);
                 _client.SetGame("sotn.malven.se");
+                server = _client.Servers.ToList();
+                if (_isUpdated)
+                {
+                    foreach (var serv in server)
+                    {
+                        //_client.GetChannel(serv.Id).SendMessage("I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.");
+                    }
+                }
+                //_client.GetChannel(server[1].Id).SendMessage("I've been Updated, @" + _client.CurrentUser.Name + " help to see all commands.");
             });
         }
     }
