@@ -4,11 +4,13 @@ using Discord.Modules;
 using SotnBot.Modules.Diablo;
 using SotnBot.Modules.Search;
 using SotnBot.Modules.Public;
+using SotnBot.Modules.Economy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SotnBot.Classes;
 
 namespace SotnBot
 {
@@ -29,6 +31,7 @@ namespace SotnBot
 
             //GlobalSettings.Save();
             GlobalSettings.Load();
+            EconomyFactory.Load();
 
             _client = new DiscordClient(x =>
             {
@@ -42,20 +45,22 @@ namespace SotnBot
             _client.AddModule<SearchModule>("Search", ModuleFilter.None);
             _client.AddModule<DiabloModule>("Diablo", ModuleFilter.None);
             _client.AddModule<PublicModule>("Suggestion", ModuleFilter.None);
+            _client.AddModule<EconomyModule>("Bank", ModuleFilter.None);
 
             _client.ExecuteAndWait(async () =>
             {
                 await _client.Connect(GlobalSettings.Discord.Email, GlobalSettings.Discord.Password);
-                _client.SetGame("sotn.malven.se");
+                _client.SetGame("'@" + _client.CurrentUser.Name + " help'");
                 server = _client.Servers.ToList();
                 if (_isUpdated)
                 {
                     foreach (var serv in server)
                     {
-                        //_client.GetChannel(serv.Id).SendMessage("I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.");
+                        await _client.GetChannel(serv.Id).SendMessage("**I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.**");
                     }
                 }
-                //_client.GetChannel(server[1].Id).SendMessage("I've been Updated, @" + _client.CurrentUser.Name + " help to see all commands.");
+                //await _client.GetChannel(server[1].Id).SendMessage("**I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.**");
+
             });
         }
     }
