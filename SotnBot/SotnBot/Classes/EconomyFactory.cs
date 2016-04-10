@@ -36,19 +36,24 @@ namespace SotnBot.Classes
         {
             try
             {
-                User user = new User();
+                User tempUser = FindUser(_user);
+                if (tempUser == null)
+                {
+                    User user = new User();
 
-                user.userID = _user.Id;
-                user.name = _user.Name;
-                user.cashAmount = 0;
-                user.lastPayday = DateTime.Now;
+                    user.userID = _user.Id;
+                    user.name = _user.Name;
+                    user.cashAmount = 0;
+                    user.lastPayday = DateTime.Now;
 
-                List<User> tempUsers = _economy.users.ToList();
-                tempUsers.Add(user);
-                _economy.users = tempUsers.ToArray();
-                Save();
+                    List<User> tempUsers = _economy.users.ToList();
+                    tempUsers.Add(user);
+                    _economy.users = tempUsers.ToArray();
+                    Save();
 
-                return "User: " + user.name + " was added to the " + _economy.bank.bankName;
+                    return "User: " + user.name + " was added to the " + _economy.bank.bankName;
+                }
+                return "You already registered to the bank.";
             }
             catch (Exception ex)
             {

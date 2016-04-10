@@ -49,7 +49,8 @@ namespace SotnBot
 
             _client.ExecuteAndWait(async () =>
             {
-                await _client.Connect(GlobalSettings.Discord.Email, GlobalSettings.Discord.Password);
+                //https://discordapp.com/oauth2/authorize?&client_id=168225708793921537&scope=bot&permissions=46245
+                await _client.Connect("MTY4MjI5MTYxMDAzOTA5MTIw.CeojTg.EVdKvGK5iImHy22BgifSECpwlPI");
                 _client.SetGame("'@" + _client.CurrentUser.Name + " help'");
                 server = _client.Servers.ToList();
                 if (_isUpdated)
