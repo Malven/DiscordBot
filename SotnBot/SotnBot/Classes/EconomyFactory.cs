@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Discord;
 
 namespace SotnBot.Classes
 {
@@ -99,9 +100,45 @@ namespace SotnBot.Classes
         {
             User user = FindUser(_user);
             if (user != null)
-                return "Your total is: $" + user.cashAmount + ".";
+                return "Your balance is: $" + user.cashAmount + ".";
             else
                 return "You are not registered to the " + _economy.bank.bankName + ".";
+        }
+
+        public static string TransferFunds(Discord.User _giver, Discord.User _receiver, int _amount)
+        {
+            User tempGiver = FindUser(_giver);
+            User tempRec = FindUser(_receiver);
+            if (tempGiver == null)
+                return "You are not registered to the bank.";
+            if (tempRec == null)
+                return _receiver.Name + " is not registered with the bank.";
+            //If giver has enough cash
+            if(GetTotal(_giver) >= _amount)
+            {
+                //withdraw funds
+                WithdrawFunds(_giver, _amount);
+                //addfund to receiver
+                AddFunds(_receiver, _amount);
+                Save();
+                return "Transaction completed. " + _giver.Name + " transfered " + _amount + " to " + _receiver.Name + ".";
+            }
+            return "Transaction failed, you dont have enough cash.";
+        }
+
+        private static void AddFunds(Discord.User _receiver, int _amount)
+        {
+            _economy.users.Where(x => x.userID == _receiver.Id).First().cashAmount += _amount;
+        }
+
+        private static void WithdrawFunds(Discord.User _giver, int _amount)
+        {
+            _economy.users.Where(x => x.userID == _giver.Id).First().cashAmount -= _amount;
+        }
+
+        private static int GetTotal(Discord.User _giver)
+        {
+            return _economy.users.Where(x => x.userID == _giver.Id).First().cashAmount;
         }
 
         /// <summary>

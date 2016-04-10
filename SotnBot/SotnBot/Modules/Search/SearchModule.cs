@@ -30,8 +30,8 @@ namespace SotnBot.Modules.Search
                     string result;
                     var movie = ImdbScraper.ImdbScrape(e.Args[0], true);
                     if (movie.Status) result = movie.ToString();
-                    else result = "Couldn't find that movie.";
-                    await e.Channel.SendMessage(result);
+                    else result = e.User.Mention + " Couldn't find that movie.";
+                    await e.Channel.SendMessage(e.User.Mention + " " + result);
                 });
             });
         }

@@ -22,13 +22,14 @@ namespace SotnBot.Modules.Public
             _manager.CreateCommands("", group =>
             {
                 group.CreateCommand("suggestion")
-                .Description("Send a suggestion on what to implement to the bot, encapsulate the suggestion with ', ex: 'add more lewt'.")
-                .Parameter("text")
+                .Description("Send a suggestion on what to implement to the bot")
+                .Alias("sugg")
+                .Parameter("text", ParameterType.Unparsed)
                 .Do(async e =>
                 {
                     await e.Channel.SendIsTyping();
                     Console.WriteLine(e.Args[0].ToString() + " by user: " + e.User.Name);
-                    await e.Channel.SendMessage("Thank you for your suggestion!");
+                    await e.Channel.SendMessage(e.User.Mention + " Thank you for your suggestion!");
                 });
             });
         }

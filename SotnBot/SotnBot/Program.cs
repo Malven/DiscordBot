@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SotnBot.Classes;
+using SotnBot.Modules.SlotMachine;
 
 namespace SotnBot
 {
@@ -46,6 +47,7 @@ namespace SotnBot
             _client.AddModule<DiabloModule>("Diablo", ModuleFilter.None);
             _client.AddModule<PublicModule>("Suggestion", ModuleFilter.None);
             _client.AddModule<EconomyModule>("Bank", ModuleFilter.None);
+            _client.AddModule<SlotMachineModule>("Slot Machine", ModuleFilter.None);
 
             _client.ExecuteAndWait(async () =>
             {

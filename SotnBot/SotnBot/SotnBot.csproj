@@ -84,10 +84,13 @@
     <Compile Include="Classes\GlobalSettings.cs" />
     <Compile Include="Classes\IMDBMovie.cs" />
     <Compile Include="Classes\IMDBScraper.cs" />
+    <Compile Include="Classes\SlotMachine.cs" />
+    <Compile Include="Classes\SlotMachineFactory.cs" />
     <Compile Include="Modules\Diablo\DiabloModule.cs" />
     <Compile Include="Modules\Economy\EconomyModule.cs" />
-    <Compile Include="Modules\Public\Public.cs" />
+    <Compile Include="Modules\Public\PublicModule.cs" />
     <Compile Include="Modules\Search\SearchModule.cs" />
+    <Compile Include="Modules\SlotMachine\SlotMachineModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

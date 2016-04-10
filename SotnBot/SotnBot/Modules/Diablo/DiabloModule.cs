@@ -30,10 +30,10 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if(e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69882-2-4-gr100-zdps-globe-barb-group");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69882-2-4-gr100-zdps-globe-barb-group");
                     } else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69865-2-4-gr90-raekor-furious-charge");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69865-2-4-gr90-raekor-furious-charge");
                     }
                 });
 
@@ -46,11 +46,11 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69873-2-4-gr92-dh-shadow-impale");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69873-2-4-gr92-dh-shadow-impale");
                     }
                     else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69836-2-4-gr-75-86-nats-fok-fulminator");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69836-2-4-gr-75-86-nats-fok-fulminator");
                     }
                 });
 
@@ -63,11 +63,11 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69867-2-4-gr100-energy-twister");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69867-2-4-gr100-energy-twister");
                     }
                     else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69867-2-4-gr100-energy-twister");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69867-2-4-gr100-energy-twister");
                     }
                 });
 
@@ -80,11 +80,11 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69908-2-4-gr100-loh-heal-monk-group");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69908-2-4-gr100-loh-heal-monk-group");
                     }
                     else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69914-2-4-gr85-lon-flurry-ep");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69914-2-4-gr85-lon-flurry-ep");
                     }
                 });
 
@@ -97,11 +97,11 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69853-2-4-gr90-lon-bombardment");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69853-2-4-gr90-lon-bombardment");
                     }
                     else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69853-2-4-gr90-lon-bombardment");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69853-2-4-gr90-lon-bombardment");
                     }
                 });
 
@@ -114,11 +114,11 @@ namespace SotnBot.Modules.Diablo
                     await e.Channel.SendIsTyping();
                     if (e.GetArg("group").ToString() == "group")
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69876-2-4-gr100-wd-support-group");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69876-2-4-gr100-wd-support-group");
                     }
                     else
                     {
-                        await e.Channel.SendMessage("http://www.diablofans.com/builds/69927-2-4-gr90-lon-dart-wd-group");
+                        await e.Channel.SendMessage(e.User.Mention + " http://www.diablofans.com/builds/69927-2-4-gr90-lon-dart-wd-group");
                     }
                 });
 
