@@ -22,13 +22,13 @@ namespace SotnBot.Classes
             if (SlotTypesAreEqual("GRAPE"))
                 return 2;
             else if (SlotTypesAreEqual("APPLE"))
-                return 3;
-            else if (SlotTypesAreEqual("WILD CHERRY"))
                 return 4;
-            else if (SlotTypesAreEqual("BELL"))
+            else if (SlotTypesAreEqual("WILD CHERRY"))
                 return 5;
+            else if (SlotTypesAreEqual("BELL"))
+                return 10;
             else if (SlotTypesAreEqual("BAR"))
-                return 6;
+                return 15;
             else if (SlotTypesAreEqual("LUCKY 7"))
                 return 25;
             else
@@ -48,9 +48,11 @@ namespace SotnBot.Classes
             int multiplier = CheckIfWin();
             if(multiplier != 0)
             {
-                user.cashAmount += betAmount * multiplier;
+                int sum = (betAmount * multiplier);
+                EconomyFactory.Instance.bank.cashAmount -= sum;
+                user.cashAmount += sum;
                 EconomyFactory.Save();
-                return ShowSlotValues() + "You won $" + betAmount * multiplier + "!";
+                return ShowSlotValues() + "You won $" + sum + "!";
             }else
             {
                 user.cashAmount -= betAmount;

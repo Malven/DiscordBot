@@ -26,12 +26,8 @@ namespace SotnBot
 
         private void Start(string[] args)
         {
-            //Enter login info here
-            GlobalSettings.Discord.Email = "";
-            GlobalSettings.Discord.Password = "";
-
             //GlobalSettings.Save();
-            GlobalSettings.Load();
+            //GlobalSettings.Load();
             EconomyFactory.Load();
 
             _client = new DiscordClient(x =>
@@ -39,6 +35,7 @@ namespace SotnBot
                 x.AppName = "S.O.T.N-BOT";
             })
             .UsingCommands(x => {
+                x.PrefixChar =  '!';
                 x.HelpMode = HelpMode.Public;
             })
             .UsingModules();
@@ -53,13 +50,13 @@ namespace SotnBot
             {
                 //https://discordapp.com/oauth2/authorize?&client_id=168225708793921537&scope=bot&permissions=46245
                 await _client.Connect("MTY4MjI5MTYxMDAzOTA5MTIw.CeojTg.EVdKvGK5iImHy22BgifSECpwlPI");
-                _client.SetGame("'@" + _client.CurrentUser.Name + " help'");
+                _client.SetGame("'!help'");
                 server = _client.Servers.ToList();
                 if (_isUpdated)
                 {
                     foreach (var serv in server)
                     {
-                        await _client.GetChannel(serv.Id).SendMessage("**I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.**");
+                        await _client.GetChannel(serv.Id).SendMessage("**I've been updated, type !help to see all commands.**");
                     }
                 }
                 //await _client.GetChannel(server[1].Id).SendMessage("**I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.**");

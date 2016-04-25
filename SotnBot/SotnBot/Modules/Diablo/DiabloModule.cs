@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AltarAPIDiabloIII;
 
 namespace SotnBot.Modules.Diablo
 {
@@ -13,13 +14,44 @@ namespace SotnBot.Modules.Diablo
     {
         private ModuleManager _manager;
         private DiscordClient _client;
+        D3Cache cache;
 
         void IModule.Install(ModuleManager manager)
         {
             _manager = manager;
             _client = manager.Client;
+            cache = new D3Cache();
+            cache.ApiKey = "3xq99zhmrdeeweb2zq3sybynbrszymkq";
+            cache.DefaultRegion = AltarAPIDiabloIII.Region.EU;
 
-            manager.CreateCommands("", group =>
+            manager.CreateCommands("search", group =>
+            {
+                group.CreateCommand("profile")
+                .Description("Return all heroes from a profile. Tag = username#1234 on B.Net.")
+                .Parameter("tag", ParameterType.Required)
+                .Do(async e =>
+                {
+                    Career awaitedCareer = await cache.GetCareerAsync(e.GetArg("tag").ToString());
+                    string heroNames = "";
+                    foreach (var hero in awaitedCareer.Heroes)
+                    {
+                        heroNames += hero.Name + "\n";
+                    }
+                    await e.Channel.SendMessage(heroNames);
+                });
+
+                group.CreateCommand("item")
+                .Description("Searches for an item")
+                .Parameter("item", ParameterType.Unparsed)
+                .Do(async e =>
+                {
+                    string temp = e.GetArg("item").Replace(" ", "-");
+                    Item item = await cache.GetFullItemAsync("item/" + temp.ToString());
+                    await e.Channel.SendMessage("http://eu.battle.net/d3/en/"+item.TooltipParams);
+                });
+            });
+
+            manager.CreateCommands("build", group =>
             {
                 group.CreateCommand("barbarian")
                 .Description("Returns a link to a Barbarian solo build unless 'barbarian group' is specified.")

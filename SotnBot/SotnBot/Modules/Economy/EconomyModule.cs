@@ -80,6 +80,17 @@ namespace SotnBot.Modules.Economy
 
                 });
 
+                //remove oneself from the bank
+                group.CreateCommand("remove")
+                .Description("Removes you from the bank.")
+                .Do(async e =>
+                {
+                    if (EconomyFactory.RemoveUserFromBank(e.User))
+                        await e.Channel.SendMessage(e.User.Mention + " was removed from the bank.");
+                    else
+                        await e.Channel.SendMessage(e.User.Mention + " was not removed from the bank, perhaps you aren't a member yet?");
+                });
+
                 //Bankinfo
                 group.CreateCommand("info")
                 .Description("Shows info about the bank and todo list.")
@@ -88,8 +99,8 @@ namespace SotnBot.Modules.Economy
                     await e.Channel.SendMessage(e.User.Mention + " " + EconomyFactory.Instance.bank.bankName + "\n" +
                             "Registered users: " + EconomyFactory.Instance.users.Count() + ".\n" +
                             "Bank cash amount: $" + EconomyFactory.Instance.bank.cashAmount + ".\n" +
-                            "**TODO**\n:one:transfer cash between users/bank.**DONE**\n:two:more ways to earn cash(slot machines perhaps?)**DONE**\n" +
-                            ":three:ability to remove oneself from the bank."
+                            "**TODO**\n:one:transfer cash between users.**DONE**\n:two:more ways to earn cash(slot machines perhaps?)**DONE**\n" +
+                            ":three:ability to remove oneself from the bank.**DONE**"
                         );
                 });
                 

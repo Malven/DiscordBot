@@ -21,6 +21,22 @@ namespace SotnBot.Classes
             get { return _economy; }
         }
 
+        public static bool RemoveUserFromBank(Discord.User _user)
+        {
+            User temp = FindUser(_user);
+            if(temp != null)
+            {
+                List<User> tempUsers = _economy.users.ToList();
+                tempUsers.Remove(temp);
+                _economy.users = tempUsers.ToArray();
+                Save();
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+
         public static void Save()
         {
             using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
