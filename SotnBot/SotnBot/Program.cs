@@ -18,7 +18,6 @@ namespace SotnBot
     class Program
     {
         private DiscordClient _client;
-        public List<Server> server;
 
         private bool _isUpdated = false;
                 
@@ -51,15 +50,15 @@ namespace SotnBot
                 //https://discordapp.com/oauth2/authorize?&client_id=168225708793921537&scope=bot&permissions=46245
                 await _client.Connect("MTY4MjI5MTYxMDAzOTA5MTIw.CeojTg.EVdKvGK5iImHy22BgifSECpwlPI");
                 _client.SetGame("'!help'");
-                server = _client.Servers.ToList();
-                if (_isUpdated)
-                {
-                    foreach (var serv in server)
-                    {
-                        await _client.GetChannel(serv.Id).SendMessage("**I've been updated, type !help to see all commands.**");
-                    }
-                }
-                //await _client.GetChannel(server[1].Id).SendMessage("**I've been updated, '@" + _client.CurrentUser.Name + " help' to see all commands.**");
+                //server = _client.Servers.ToList();
+                //if (_isUpdated)
+                //{
+                //    foreach (var serv in server)
+                //    {
+                //        await _client.GetChannel(serv.Id).SendMessage("@here **I've been updated, type !help to see all commands.**");
+                //    }
+                //}
+                //await _client.GetChannel(server[1].Id).SendMessage("**I've been updated, '!help' to see all commands.**");
 
             });
         }
