@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SotnBot.Classes;
 using SotnBot.Modules.SlotMachine;
+using SotnBot.Modules.LevelSystem;
 
 namespace SotnBot
 {
@@ -23,7 +24,7 @@ namespace SotnBot
                 
         static void Main(string[] args) => new Program().Start(args);
         
-        public void Start(string[] args)
+        private void Start(string[] args)
         {
             //GlobalSettings.Save();
             //GlobalSettings.Load();
@@ -45,6 +46,7 @@ namespace SotnBot
             _client.AddModule<PublicModule>("Suggestion", ModuleFilter.None);
             _client.AddModule<EconomyModule>("Bank", ModuleFilter.None);
             _client.AddModule<SlotMachineModule>("Slot Machine", ModuleFilter.None);
+            _client.AddModule<LevelSystemModule>("Level System", ModuleFilter.None);
 
 
             _client.ExecuteAndWait(async () => {
@@ -56,6 +58,8 @@ namespace SotnBot
                             LevelSystemFactory.AddUserToLevelSystem( e.User );
                         }
                         else {
+                            if (e.Message.Text.Contains("!level"))
+                                return;
                             int exp = e.Message.Text.Length;
                             if ( e.Message.Text.Contains( "http" ) ) {
                                 exp += 10;

@@ -20,17 +20,16 @@ namespace SotnBot.Classes {
             get { return _levelSystem; }
         }
 
-        public string ShowLevel(Discord.User _user ) {
+        public static string ShowLevel(Discord.User _user ) {
             User temp = FindUser( _user );
             if(temp == null ) {
                 AddUserToLevelSystem( _user );
                 return "You are now a part of the S.O.T.N Level System, type !level info for more info.";
             } else {
-                string message = "Your level: " + temp.Level + ".\n" +
+                return "Your level: " + temp.Level + ".\n" +
                                  "Current exp: " + temp.Exp + ".\n" +
                                  "Exp to next level: " + ( temp.MaxExp - temp.Exp ) + ".";
             }
-            return "Something went wrong";
         }
 
         public static void AddExpTouser(User _user, int amount ) {
@@ -38,11 +37,13 @@ namespace SotnBot.Classes {
             if(_user.Exp >= _user.MaxExp ) {
                 LevelUp(_user);
             }
+            Save();
         }
 
         private static void LevelUp(User _user) {
             _user.Level += 1;
             _user.MaxExp = GetNewMaxExp( _user );
+            Save();
         }
 
         public static void AddUserToLevelSystem( Discord.User _user ) {
@@ -64,7 +65,7 @@ namespace SotnBot.Classes {
         }
 
         private static int GetNewMaxExp( User _user ) {
-            return Convert.ToInt32( ( _user.Level / LevelSystem.expConstant ) * ( _user.Level * LevelSystem.expConstant ) );
+            return Convert.ToInt32( ( _user.Level / LevelSystem.expConstant ) * 2 );
         }
 
         /// <summary>
@@ -80,13 +81,19 @@ namespace SotnBot.Classes {
             return null;
         }
         public static void Save() {
-            using ( var stream = new FileStream( path, FileMode.Create, FileAccess.Write, FileShare.None ) )
+            using ( var stream = new FileStream( path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None ) )
             using ( var writer = new StreamWriter( stream ) )
                 writer.Write( JsonConvert.SerializeObject( Instance, Formatting.Indented ) );
         }
 
         public static void Load() {
-            _levelSystem = JsonConvert.DeserializeObject<LevelSystem>( File.ReadAllText( path ) );
+            if (File.Exists(path))
+                _levelSystem = JsonConvert.DeserializeObject<LevelSystem>(File.ReadAllText(path));
+            else
+            {
+                Save();
+                Load();
+            }
         }
     }
 }

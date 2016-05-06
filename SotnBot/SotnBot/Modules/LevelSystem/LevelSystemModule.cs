@@ -25,6 +25,13 @@ namespace SotnBot.Modules.LevelSystem {
                                                  "!level stats: Shows your current stats or add you to the system if you are not apart of it.\n" +
                                                  "Current Users in the system: " + LevelSystemFactory.Instance.Users.Length + ".");
                 } );
+
+                group.CreateCommand("stats")
+                .Description("Shows your stats")
+                .Do(async e =>
+                {
+                    await e.Channel.SendMessage(LevelSystemFactory.ShowLevel(e.User));
+                });
             } );
         }
     }
