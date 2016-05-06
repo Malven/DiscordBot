@@ -20,24 +20,80 @@ namespace SotnBot.Modules.Diablo
         {
             _manager = manager;
             _client = manager.Client;
-            cache = new D3Cache();
-            cache.ApiKey = "3xq99zhmrdeeweb2zq3sybynbrszymkq";
-            cache.DefaultRegion = AltarAPIDiabloIII.Region.EU;
+
+            manager.CreateCommands("d3", group =>
+            {
+                group.CreateCommand("info")
+                .Description("Some basic info about current/next season.")
+                .Do(async e =>
+                {
+                    await e.Channel.SendMessage("Season 6 will begin 29/4 at 17:00 CEST.\n**Patch Notes 2.4.1:** http://us.battle.net/d3/en/blog/20099649/patch-241-now-live-4-26-2016");
+                });
+            });
 
             manager.CreateCommands("search", group =>
             {
-                group.CreateCommand("profile")
+                group.CreateCommand("heroes")
                 .Description("Return all heroes from a profile. Tag = username#1234 on B.Net.")
                 .Parameter("tag", ParameterType.Required)
                 .Do(async e =>
                 {
-                    Career awaitedCareer = await cache.GetCareerAsync(e.GetArg("tag").ToString());
-                    string heroNames = "";
-                    foreach (var hero in awaitedCareer.Heroes)
+                    cache = new D3Cache();
+                    cache.ApiKey = "3xq99zhmrdeeweb2zq3sybynbrszymkq";
+                    cache.DefaultRegion = AltarAPIDiabloIII.Region.EU;
+                    cache.DefaultLocale = Locale.en_GB;
+                    await e.Channel.SendIsTyping();
+                    try
                     {
-                        heroNames += hero.Name + "\n";
+                        Career awaitedCareer = await cache.GetCareerAsync(e.GetArg("tag").ToString(), AltarAPIDiabloIII.Region.EU, Locale.en_GB);
+                        string heroNames = "";
+                        foreach (var hero in awaitedCareer.Heroes)
+                        {
+                            heroNames += "**" + hero.Name + "**" + " the " + hero.Class + " with " + hero.Kills.Elites + " elite kills.\n";
+                        }
+                        await e.Channel.SendMessage(heroNames);
                     }
-                    await e.Channel.SendMessage(heroNames);
+                    catch (Exception)
+                    {
+                        await e.Channel.SendMessage("Couldn't find profile.");
+                    }
+                });
+
+                group.CreateCommand("profile")
+                .Description("Show some basic info about a profile. Tag = username#1234 on B.Net.")
+                .Parameter("tag", ParameterType.Required)
+                .Do(async e =>
+                {
+                    cache = new D3Cache();
+                    cache.ApiKey = "3xq99zhmrdeeweb2zq3sybynbrszymkq";
+                    cache.DefaultRegion = AltarAPIDiabloIII.Region.EU;
+                    cache.DefaultLocale = Locale.en_GB;
+                    await e.Channel.SendIsTyping();
+                    try
+                    {
+                        Career awaitedCareer = await cache.GetCareerAsync(e.GetArg("tag").ToString(), AltarAPIDiabloIII.Region.EU, Locale.en_GB);
+                        string bTag = awaitedCareer.BattleTag;
+                        int mKills = awaitedCareer.Kills.Monsters;
+                        int eKills = awaitedCareer.Kills.Elites;
+                        int deadHeroes = awaitedCareer.FallenHeroes.Count;
+                        string guild = awaitedCareer.GuildName;
+                        int numHeroes = awaitedCareer.Heroes.Count;
+                        int pLevel = awaitedCareer.ParagonLevel;
+                        Hero lastPlayedHero = await cache.GetFullHeroAsync(awaitedCareer, awaitedCareer.LastHeroPlayedID);
+
+                        await e.Channel.SendMessage("**Information about " + bTag + ".**\n"
+                                                   + "**Guild:** " + guild + ".\n"
+                                                   + "**Heroes:** " + numHeroes + ".\n"
+                                                   + "**Monster Kills:** " + mKills + ".\n"
+                                                   + "**Elite Kills:** " + eKills + ".\n"
+                                                   + "**Dead Hardcore Heroes:** " + deadHeroes + ".\n"
+                                                   + "**Paragon Level:** " + pLevel + ".\n"
+                                                   + "**Last Hero Played:** " + lastPlayedHero.Name + ".");
+                    }
+                    catch (Exception)
+                    {
+                        await e.Channel.SendMessage("Couldn't find profile.");
+                    }
                 });
 
                 group.CreateCommand("item")
@@ -45,6 +101,10 @@ namespace SotnBot.Modules.Diablo
                 .Parameter("item", ParameterType.Unparsed)
                 .Do(async e =>
                 {
+                    cache = new D3Cache();
+                    cache.ApiKey = "3xq99zhmrdeeweb2zq3sybynbrszymkq";
+                    cache.DefaultRegion = AltarAPIDiabloIII.Region.EU;
+                    cache.DefaultLocale = Locale.en_GB;
                     string temp = e.GetArg("item").Replace(" ", "-");
                     Item item = await cache.GetFullItemAsync("item/" + temp.ToString());
                     await e.Channel.SendMessage("http://eu.battle.net/d3/en/"+item.TooltipParams);
