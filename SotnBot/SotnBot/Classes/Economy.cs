@@ -35,5 +35,8 @@ namespace SotnBot.Classes
         public string name { get; set; }
         public int cashAmount { get; set; }
         public DateTime lastPayday { get; set; }
+        public int Exp { get; set; }
+        public int MaxExp { get; set; }
+        public int Level { get; set; }
     }
 }
