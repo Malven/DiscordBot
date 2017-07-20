@@ -48,8 +48,8 @@ namespace SotnBot
 
             _client.ExecuteAndWait(async () =>
             {
-                //https://discordapp.com/oauth2/authorize?&client_id=168225708793921537&scope=bot&permissions=46245
-                await _client.Connect("MTY4MjI5MTYxMDAzOTA5MTIw.CeojTg.EVdKvGK5iImHy22BgifSECpwlPI");
+                //https://discordapp.com/oauth2/authorize?&client_id=&scope=bot&permissions=46245
+                await _client.Connect("");
                 _client.SetGame("'!help'");
                 server = _client.Servers.ToList();
                 if (_isUpdated)
