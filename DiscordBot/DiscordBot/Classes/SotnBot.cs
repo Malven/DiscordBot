@@ -23,7 +23,7 @@ namespace DiscordBot
             {
                 bot.MessageReceived += Bot_MessageReceived;
 
-                await bot.Connect("dahil82@gmail.com", "d6qkwa52");
+                await bot.Connect("");
 
                 bot.SetGame("I'm ONLINE");
             });
